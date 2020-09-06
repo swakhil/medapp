@@ -1,0 +1,145 @@
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+<!DOCTYPE html>
+{% load static %}
+</head>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Profile form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <input type="checkbox" id="check">
+    <!--header area start-->
+    <header>
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+      <div class="left_area">
+        <button><a href="{% url 'home' %}"><h3>Get Your <span> Dose</span></h3>
+      </a></button>
+      </div>
+      <div class="right_area">
+        <a href="{% url 'logout' %}" class="logout_btn">Logout</a>
+      </div>
+    </header>
+    <br/>
+    <br/>
+    <br/>
+    <!--header area end-->
+    <!--mobile navigation bar start-->
+    <div class="mobile_nav">
+      <div class="nav_bar">
+        <!--<img src="1.png" class="mobile_profile_image" alt="">-->
+        <i class="fa fa-bars nav_btn"></i>
+      </div>
+      <div class="mobile_nav_items">
+          {% if user.is_authenticated %}
+        <a href="#"><i class="fas fa-cogs"></i><span>Directions of use</span></a>
+        <a href="{% url 'addmedicine' %}"><i class="fas fa-table"></i><span>Add Medicine</span></a>
+        <a href="{% url 'medicinelist' %}"><i class="fas fa-th"></i><span>Your Medicine List</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>Profile</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>Directions of use</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Contact</span></a>
+        
+         {% else %}
+ <h1 class="heading">Please Login/SignUp</h1>
+<a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+<a class="nav-link" href="{% url 'login' %}">Login</a>
+{% endif %}
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <!--mobile navigation bar end-->
+    <!--sidebar start-->
+    <div class="sidebar">
+      <div class="profile_info">
+        <!--<img src="1.png" class="profile_image" alt="">-->
+        <h4>Welcome, {{ user.get_username }}</h4>
+      </div>
+      <a href="{% url 'addmedicine' %}"><i class="fas fa-table"></i><span>Add Medicine</span></a>
+      <a href="{% url 'medicinelist' %}"><i class="fas fa-th"></i><span>Your Medicine List</span></a>
+      <a href="{% url 'profile' %}"><i class="fas fa-sliders-h"></i><span>Profile</span></a>
+     
+     
+    </div>
+    <!--sidebar end-->
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<main>
+<br/>
+<div class="contact-form">
+	<br/>
+<h1>PROFILE</h1>
+<div class="textb">
+<label>Full Name:</label>
+<input type="text" name="full_name" placeholder="Enter your name">
+</div>
+
+<div class="textb">
+<label>Email:</label>
+<input type="email" name="get_email" placeholder="Enter your e-mail">
+</div>
+
+<div class="textb">
+<label>Phone Number:</label>
+<input type="text" name="phone_number" placeholder="Enter your phone Number">
+</div>
+
+<div class="textb">
+<label>Date of Birth:</label>
+<input type="text" name="date_of_birth" placeholder="Enter your date of birth">
+</div>
+
+<div class="textb">
+<label>Age:</label>
+<input type="text" name="get_age" placeholder="Enter your age">
+</div>
+
+<div class="textb">
+<label>Tablets:</label>
+<input type="text" name="get_tablet"placeholder="Enter number of tabletes you use per day">
+</div>
+
+<div class="textb">
+<label>Prescribed Doctor:</label>
+<input type="text" name="doc_name"placeholder="Enter name of your Doctor">
+</div>
+
+<a class="btn">Submit</a>
+
+</div>
+</main>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.nav_btn').click(function(){
+        $('.mobile_nav_items').toggleClass('active');
+      });
+    });
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+{% load sweetify %}
+{% sweetify %}
+</body>
+</html>
+{% endblock %}

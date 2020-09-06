@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
+ <style> 
+        /* Modify the background color */ 
+          
+        .navbar-custom { 
+            background-color: #2F4F4F; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #FFFAFA; 
+        } 
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #2F4F4F;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color:  #FFFAFA;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color:  #7FFFD4;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #2F4F4F;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #2F4F4F;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
+<style>
+    .heading { color: #FFFAFA; }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      
+      <a class="navbar-brand" href="{% url 'home' %}">
+      Medicine Remainder
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+       <ul class="navbar-nav ml-auto">
+{% if user.is_authenticated %}
+<li class="nav-item">
+<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+</li>
+<br/>
+
+{% else %}
+<li class="nav-item">
+<a class="nav-link" href="{% url 'signup' %}">Login</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'signup' %}">signup</a>
+</li>
+<br/>
+{% endif %}
+</ul>
+</div>
+      
+      
+    </nav>
+  </header>
+  <!-- sidebar -->
+  <div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  {% if user.is_authenticated %}
+ <a href="{% url 'addmedicine' %}">Add med</a>
+ <a href="{% url 'medicinelist' %}">Your Meds</a>
+ <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+<br/>
+{% else %}
+ <h1 class="heading">Please Login/SignUp</h1>
+<a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+<a class="nav-link" href="{% url 'signup' %}">Login</a>
+
+{% endif %}
+  
+
+ 
+
+  </div>
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰ </button>  
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <footer class="text-muted">
+  <div class="container">
+    <p class='text-center'>© FestechSolutions {% now "Y" %}</p>
+  </div>
+</footer>
+
+
+
+ 
+ 
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+  
